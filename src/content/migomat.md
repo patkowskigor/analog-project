@@ -2,7 +2,7 @@
 title: Spawanie Migomatem
 slug: 2022-12-27-my-third-post
 description: Wprowadzenie do technik spawania migomatem.
-coverImage: https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80
+coverImage: https://americantorchtip.com/wp-content/uploads/2021/10/AdobeStock_260336691-scaled.jpeg
 ---
 
 # Spawanie Migomatem

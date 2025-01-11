@@ -3,23 +3,16 @@
 </script>
 
 <template>
-  <nav>
-    <a routerLink="/">Home</a>
-  </nav>
+  <div class="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+    <nav class="w-full max-w-6xl p-4 bg-white rounded-lg shadow-md mb-8">
+      <a 
+        routerLink="/" 
+        class="text-lg text-gray-800 no-underline py-2 px-4 inline-block rounded transition-colors duration-300 hover:bg-blue-500 hover:text-white"
+      >
+        Home
+      </a>
+    </nav>
 
-  <router-outlet />
+    <router-outlet />
+  </div>
 </template>
-
-<style>
-  :host {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  nav {
-    text-align: left;
-    padding: 0 0 2rem 0;
-  }
-</style>

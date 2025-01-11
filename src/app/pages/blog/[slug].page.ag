@@ -10,15 +10,55 @@
 
 <template>
   @if (post$ | async; as post) {
-  <article>
-    <img class="post__image" [src]="post.attributes.coverImage" />
-    <analog-markdown [content]="post.content" />
-  </article>
+    <article class="max-w-3xl mx-auto p-4">
+      <img
+        class="max-h-[40vh] w-full object-cover mb-6 rounded shadow-lg"
+        [src]="post.attributes.coverImage"
+        alt="Okładka posta"
+      />
+      <div class="prose prose-indigo mx-auto mb-8">
+        <analog-markdown [content]="post.content" />
+      </div>
+    </article>
   }
+
+  <hr class="my-8 border-gray-300" />
+
+  <section class="max-w-3xl mx-auto p-4">
+    <h2 class="text-2xl font-semibold mb-4">Dodaj komentarz</h2>
+    <form class="flex flex-col space-y-4">
+      <div>
+        <label for="author" class="block text-sm font-medium text-gray-700 mb-1">
+          Autor
+        </label>
+        <input
+          id="author"
+          type="text"
+          class="w-full h-12 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
+          placeholder="Wpisz swoje imię"
+        />
+      </div>
+      <div>
+        <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">
+          Komentarz
+        </label>
+        <textarea
+          id="comment"
+          rows="4"
+          class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
+          placeholder="Wpisz treść komentarza"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="mt-4 px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 focus:ring-4 focus:ring-green-300 shadow-lg focus:outline-none active:scale-95 transition-transform duration-150"
+      >
+        Dodaj komentarz
+      </button>
+    </form>
+  </section>
 </template>
 
 <style>
-  .post__image {
-    max-height: 40vh;
-  }
+  /* Dodatkowe style, jeżeli potrzebne */
 </style>
