@@ -2,10 +2,44 @@
   import { AsyncPipe } from '@angular/common' with { analog: 'imports' };
   import { MarkdownComponent } from '@analogjs/content' with { analog: 'imports' };
   import { injectContent } from '@analogjs/content';
-
   import PostAttributes from '../../post-attributes';
 
+interface Comment {
+  author: string;
+  content: string;
+  createdAt: Date;
+}
+
   const post$ = injectContent<PostAttributes>('slug');
+
+  // Lokalna tablica do przechowywania komentarzy
+  const comments: Comment[] = [];
+
+
+  // Funkcja obsługująca wysłanie formularza komentarza
+  function submitComment(event: Event) {
+    event.preventDefault();
+
+    // Pobierz wartości z pól formularza
+    const authorInput = document.getElementById('author') as HTMLInputElement;
+    const commentInput = document.getElementById('comment') as HTMLTextAreaElement;
+    const author = authorInput.value.trim();
+    const content = commentInput.value.trim();
+
+    // Walidacja pustych pól
+    if (!author || !content) return;
+
+    // Dodaj nowy komentarz do tablicy
+    comments.push({ 
+      author, 
+      content, 
+      createdAt: new Date() 
+    });
+
+    // Wyczyść formularz
+    authorInput.value = '';
+    commentInput.value = '';
+  }
 </script>
 
 <template>
@@ -26,7 +60,7 @@
 
   <section class="max-w-3xl mx-auto p-4">
     <h2 class="text-2xl font-semibold mb-4">Dodaj komentarz</h2>
-    <form class="flex flex-col space-y-4">
+    <form class="flex flex-col space-y-4" (ngSubmit)="submitComment($event)">
       <div>
         <label for="author" class="block text-sm font-medium text-gray-700 mb-1">
           Autor
@@ -56,6 +90,29 @@
         Dodaj komentarz
       </button>
     </form>
+  </section>
+
+  <hr class="my-8 border-gray-300" />
+
+  <section class="max-w-3xl mx-auto p-4">
+    <h2 class="text-2xl font-semibold mb-4">Komentarze</h2>
+    @if (comments.length > 0) {
+      <ul class="space-y-4">
+        @for (let comment of comments) {
+          <li class="p-4 border rounded-md">
+            <p class="font-semibold">
+              {{ comment.author }} 
+              <span class="text-sm text-gray-500">
+                – {{ comment.createdAt | date:'short' }}
+              </span>
+            </p>
+            <p>{{ comment.content }}</p>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>Brak komentarzy. Bądź pierwszym, który doda komentarz!</p>
+    }
   </section>
 </template>
 
